@@ -240,6 +240,85 @@ public class @BaseControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Planning"",
+            ""id"": ""3f62c431-8b53-47ac-a633-ffa190dcb671"",
+            ""actions"": [
+                {
+                    ""name"": ""Position"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""788ed286-cb57-458e-b124-338212dd35fb"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""872b47c2-057f-404c-b3f3-8b9f489b0753"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""86b7ab5c-2d84-4177-82bd-aedd963c9661"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse only;Keyboard and Mouse"",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f945c844-58b4-4f51-bab0-3a75458ebc96"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""140d2263-a6e5-46c1-8e26-62020a0e881b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""369377e4-f788-4c12-8814-f0b1b4908f7c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Only"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2030615e-6c03-4e5b-b5e1-df985e7afd10"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse only;Keyboard and Mouse"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -300,6 +379,10 @@ public class @BaseControls : IInputActionCollection, IDisposable
         m_Navigation_PointerLocation = m_Navigation.FindAction("Pointer Location", throwIfNotFound: true);
         m_Navigation_PointerDelta = m_Navigation.FindAction("Pointer Delta", throwIfNotFound: true);
         m_Navigation_OrbitShift = m_Navigation.FindAction("Orbit Shift", throwIfNotFound: true);
+        // Planning
+        m_Planning = asset.FindActionMap("Planning", throwIfNotFound: true);
+        m_Planning_Position = m_Planning.FindAction("Position", throwIfNotFound: true);
+        m_Planning_Place = m_Planning.FindAction("Place", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -402,6 +485,47 @@ public class @BaseControls : IInputActionCollection, IDisposable
         }
     }
     public NavigationActions @Navigation => new NavigationActions(this);
+
+    // Planning
+    private readonly InputActionMap m_Planning;
+    private IPlanningActions m_PlanningActionsCallbackInterface;
+    private readonly InputAction m_Planning_Position;
+    private readonly InputAction m_Planning_Place;
+    public struct PlanningActions
+    {
+        private @BaseControls m_Wrapper;
+        public PlanningActions(@BaseControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Position => m_Wrapper.m_Planning_Position;
+        public InputAction @Place => m_Wrapper.m_Planning_Place;
+        public InputActionMap Get() { return m_Wrapper.m_Planning; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlanningActions set) { return set.Get(); }
+        public void SetCallbacks(IPlanningActions instance)
+        {
+            if (m_Wrapper.m_PlanningActionsCallbackInterface != null)
+            {
+                @Position.started -= m_Wrapper.m_PlanningActionsCallbackInterface.OnPosition;
+                @Position.performed -= m_Wrapper.m_PlanningActionsCallbackInterface.OnPosition;
+                @Position.canceled -= m_Wrapper.m_PlanningActionsCallbackInterface.OnPosition;
+                @Place.started -= m_Wrapper.m_PlanningActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_PlanningActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_PlanningActionsCallbackInterface.OnPlace;
+            }
+            m_Wrapper.m_PlanningActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Position.started += instance.OnPosition;
+                @Position.performed += instance.OnPosition;
+                @Position.canceled += instance.OnPosition;
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
+            }
+        }
+    }
+    public PlanningActions @Planning => new PlanningActions(this);
     private int m_KeyboardOnlySchemeIndex = -1;
     public InputControlScheme KeyboardOnlyScheme
     {
@@ -444,5 +568,10 @@ public class @BaseControls : IInputActionCollection, IDisposable
         void OnPointerLocation(InputAction.CallbackContext context);
         void OnPointerDelta(InputAction.CallbackContext context);
         void OnOrbitShift(InputAction.CallbackContext context);
+    }
+    public interface IPlanningActions
+    {
+        void OnPosition(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
     }
 }

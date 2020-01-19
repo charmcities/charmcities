@@ -22,11 +22,11 @@ public class CameraController : MonoBehaviour
     private bool orbitMode = false;
     private Vector3 orbitTarget;
 
+
     void Awake()
     {
         controls = new BaseControls();
-        controls.Navigation.OrbitShift.started += ctx => StartOrbit();
-        controls.Navigation.OrbitShift.canceled += ctx => orbitMode = false;
+        controls.Navigation.OrbitShift.performed += ctx => ToggleOrbit();
         controls.Navigation.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Navigation.PointerLocation.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.Navigation.PointerDelta.performed += ctx => mouseDelta = ctx.ReadValue<Vector2>();
@@ -51,12 +51,19 @@ public class CameraController : MonoBehaviour
         MouseHandler();
     }
 
-    void StartOrbit()
+    void ToggleOrbit()
     {
-        orbitMode = true;
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit);
-        orbitTarget = hit.transform.position;
+        if (orbitMode)
+        {
+            orbitMode = false;
+        }
+        else
+        {
+            orbitMode = true;
+            RaycastHit hit;
+            Physics.Raycast(transform.position, transform.forward, out hit);
+            orbitTarget = hit.point;
+        }
     }
 
     void MouseHandler()
