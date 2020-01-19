@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlanPanel : MonoBehaviour
 {
     BaseControls controls;
-    LayerMask ground = 1 << 8;
-    LayerMask illegal = 1 << 10 | 1 << 11;
+    public LayerMask groundMask = 1 << 8;
+    public LayerMask illegalMask = 1 << 10 | 1 << 11;
 
     bool showBox = false;
-    bool boxLegal;
+    public bool boxLegal;
 
     public Material legalPlan;
     public Material illegalPlan;
@@ -27,6 +27,7 @@ public class PlanPanel : MonoBehaviour
         controls = new BaseControls();
         controls.Planning.Position.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.Planning.Place.performed += ctx => PlaceCurrent();
+        Debug.Log(illegalMask);
     }
 
     private void Update()
@@ -39,14 +40,25 @@ public class PlanPanel : MonoBehaviour
                 ray.origin, 
                 currentObject.transform.localScale, 
                 ray.direction, 
-                out groundHit
+                out groundHit,
+                currentObject.transform.rotation,
+                10000,
+                groundMask
             );
             if (hitDetect)
             {
-                // Check for legal placement
+                boxLegal = !Physics.BoxCast(
+                    ray.origin,
+                    currentObject.transform.localScale / 2,
+                    ray.direction,
+                    currentObject.transform.rotation,
+                    10000,
+                    illegalMask
+                );
                 currentObject.transform.position = new Vector3(
                     groundHit.point.x, currentObject.transform.position.y, groundHit.point.z
                 );
+                currentObject.GetComponent<MeshRenderer>().material = boxLegal ? legalPlan : illegalPlan;
             }
         }
     }
@@ -69,7 +81,11 @@ public class PlanPanel : MonoBehaviour
 
     void PlaceCurrent()
     {
-        showBox = false;
+        if (boxLegal)
+        {
+            currentObject.layer = 10;
+            showBox = false;
+        }
     }
 
     private void OnEnable()

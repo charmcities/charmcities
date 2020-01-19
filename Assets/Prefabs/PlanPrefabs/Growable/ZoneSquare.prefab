@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6545417244545999589}
   - component: {fileID: 6940918790065397128}
   - component: {fileID: 431283835578517069}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ZoneSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}

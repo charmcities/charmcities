@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2892565408159029819}
   - component: {fileID: 5197552895613911614}
   - component: {fileID: 1717699262614948259}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: GouldStPowerPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
