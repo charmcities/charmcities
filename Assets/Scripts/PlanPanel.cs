@@ -27,7 +27,6 @@ public class PlanPanel : MonoBehaviour
         controls = new BaseControls();
         controls.Planning.Position.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.Planning.Place.performed += ctx => PlaceCurrent();
-        Debug.Log(illegalMask);
     }
 
     private void Update()

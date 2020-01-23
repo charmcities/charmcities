@@ -49,6 +49,14 @@ public class @BaseControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Mode Shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""f6b54e7c-6a82-46fc-89d8-b08fc6b6f462"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -238,6 +246,72 @@ public class @BaseControls : IInputActionCollection, IDisposable
                     ""action"": ""Pointer Delta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Numrow 9/0"",
+                    ""id"": ""941e2785-3e90-48eb-8388-aa42b5e81216"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mode Shift"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""06b42af8-4db5-4950-9cde-69ee26d90c9d"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Only;Keyboard and Mouse"",
+                    ""action"": ""Mode Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4373a33a-5786-4951-8247-9751b9a9718f"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Only;Keyboard and Mouse"",
+                    ""action"": ""Mode Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Bumpers"",
+                    ""id"": ""307c7299-eb19-40e9-8a3e-b4337333ab1f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mode Shift"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""fd31b747-af84-4844-8b16-fa705b9dad8f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Mode Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""50b8f470-7bee-489f-bea5-b89ccd50135e"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Mode Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -379,6 +453,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
         m_Navigation_PointerLocation = m_Navigation.FindAction("Pointer Location", throwIfNotFound: true);
         m_Navigation_PointerDelta = m_Navigation.FindAction("Pointer Delta", throwIfNotFound: true);
         m_Navigation_OrbitShift = m_Navigation.FindAction("Orbit Shift", throwIfNotFound: true);
+        m_Navigation_ModeShift = m_Navigation.FindAction("Mode Shift", throwIfNotFound: true);
         // Planning
         m_Planning = asset.FindActionMap("Planning", throwIfNotFound: true);
         m_Planning_Position = m_Planning.FindAction("Position", throwIfNotFound: true);
@@ -436,6 +511,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Navigation_PointerLocation;
     private readonly InputAction m_Navigation_PointerDelta;
     private readonly InputAction m_Navigation_OrbitShift;
+    private readonly InputAction m_Navigation_ModeShift;
     public struct NavigationActions
     {
         private @BaseControls m_Wrapper;
@@ -444,6 +520,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
         public InputAction @PointerLocation => m_Wrapper.m_Navigation_PointerLocation;
         public InputAction @PointerDelta => m_Wrapper.m_Navigation_PointerDelta;
         public InputAction @OrbitShift => m_Wrapper.m_Navigation_OrbitShift;
+        public InputAction @ModeShift => m_Wrapper.m_Navigation_ModeShift;
         public InputActionMap Get() { return m_Wrapper.m_Navigation; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -465,6 +542,9 @@ public class @BaseControls : IInputActionCollection, IDisposable
                 @OrbitShift.started -= m_Wrapper.m_NavigationActionsCallbackInterface.OnOrbitShift;
                 @OrbitShift.performed -= m_Wrapper.m_NavigationActionsCallbackInterface.OnOrbitShift;
                 @OrbitShift.canceled -= m_Wrapper.m_NavigationActionsCallbackInterface.OnOrbitShift;
+                @ModeShift.started -= m_Wrapper.m_NavigationActionsCallbackInterface.OnModeShift;
+                @ModeShift.performed -= m_Wrapper.m_NavigationActionsCallbackInterface.OnModeShift;
+                @ModeShift.canceled -= m_Wrapper.m_NavigationActionsCallbackInterface.OnModeShift;
             }
             m_Wrapper.m_NavigationActionsCallbackInterface = instance;
             if (instance != null)
@@ -481,6 +561,9 @@ public class @BaseControls : IInputActionCollection, IDisposable
                 @OrbitShift.started += instance.OnOrbitShift;
                 @OrbitShift.performed += instance.OnOrbitShift;
                 @OrbitShift.canceled += instance.OnOrbitShift;
+                @ModeShift.started += instance.OnModeShift;
+                @ModeShift.performed += instance.OnModeShift;
+                @ModeShift.canceled += instance.OnModeShift;
             }
         }
     }
@@ -568,6 +651,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
         void OnPointerLocation(InputAction.CallbackContext context);
         void OnPointerDelta(InputAction.CallbackContext context);
         void OnOrbitShift(InputAction.CallbackContext context);
+        void OnModeShift(InputAction.CallbackContext context);
     }
     public interface IPlanningActions
     {
