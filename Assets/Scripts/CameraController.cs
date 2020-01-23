@@ -41,11 +41,16 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
+        // Unity New Input System actions
         controls = new BaseControls();
+        // OrbitShift input toggles orbit mode
         controls.Navigation.OrbitShift.performed += ctx => ToggleOrbit();
+        // Movement inputs are processed in DefaultHandler (called by Update)
         controls.Navigation.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        // Mouse position and delta are processed in MouseHandler (called by Update)
         controls.Navigation.PointerLocation.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.Navigation.PointerDelta.performed += ctx => mouseDelta = ctx.ReadValue<Vector2>();
+        // Starting and holding zoom inputs are processed in Update. Note that Zoom needs a "Release Only" interaction, which will perform a value of 0, to end zooming.
         controls.Navigation.Zoom.started += ctx => zoomAmount = ctx.ReadValue<float>();
         controls.Navigation.Zoom.performed += ctx => zoomAmount = ctx.ReadValue<float>();
 
@@ -77,7 +82,7 @@ public class CameraController : MonoBehaviour
             float panZ = moveInput.y * panSpeed * Time.deltaTime;
             pan = new Vector3(panX, 0, panZ);
 
-            transform.Translate(pan, Space.World);
+            transform.Translate(pan, Space.Self);
         }
         else
         {
@@ -111,7 +116,7 @@ public class CameraController : MonoBehaviour
                 pan += Vector3.right * panSpeed * Time.deltaTime;
             }
 
-            transform.Translate(pan, Space.World);
+            transform.Translate(pan, Space.Self);
         }
         else
         {
@@ -152,7 +157,7 @@ public class CameraController : MonoBehaviour
         float orbitY = input.y * orbitSpeed * Time.deltaTime;
 
         // Note the inversion: the X rotation is altered by Y input and vice versa.
-        cameraXRotation += orbitY;
+        cameraXRotation -= orbitY;
         cameraYRotation += orbitX;
 
         // The maximum X rotation is clamped. An orbitYMax of 90 will allow a top-down view.
