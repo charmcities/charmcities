@@ -57,6 +57,14 @@ public class @BaseControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""bebc09fd-35f2-46d8-891c-8170cdb5225d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -312,6 +320,83 @@ public class @BaseControls : IInputActionCollection, IDisposable
                     ""action"": ""Mode Shift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""PgUp/PgDn"",
+                    ""id"": ""a35b6e04-4888-4d8b-9f99-c908a8140db4"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Hold,Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""399ca29a-cc0b-4eb0-b22d-d57a2e4708a2"",
+                    ""path"": ""<Keyboard>/pageDown"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Only;Keyboard and Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c0fdf6f1-8523-4215-8af2-0535c0334bc2"",
+                    ""path"": ""<Keyboard>/pageUp"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Only;Keyboard and Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5c3b318-d353-4f43-9cde-d0d1bd572ed5"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse only;Keyboard and Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Gamepad Dpad"",
+                    ""id"": ""a1e16071-a532-491d-90f8-c1b8b12cd090"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Hold,Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""05c468a3-71fa-4da6-9677-595ca7df5ae5"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""63630f46-6259-4789-9338-2c7b79e41b9b"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -454,6 +539,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
         m_Navigation_PointerDelta = m_Navigation.FindAction("Pointer Delta", throwIfNotFound: true);
         m_Navigation_OrbitShift = m_Navigation.FindAction("Orbit Shift", throwIfNotFound: true);
         m_Navigation_ModeShift = m_Navigation.FindAction("Mode Shift", throwIfNotFound: true);
+        m_Navigation_Zoom = m_Navigation.FindAction("Zoom", throwIfNotFound: true);
         // Planning
         m_Planning = asset.FindActionMap("Planning", throwIfNotFound: true);
         m_Planning_Position = m_Planning.FindAction("Position", throwIfNotFound: true);
@@ -512,6 +598,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Navigation_PointerDelta;
     private readonly InputAction m_Navigation_OrbitShift;
     private readonly InputAction m_Navigation_ModeShift;
+    private readonly InputAction m_Navigation_Zoom;
     public struct NavigationActions
     {
         private @BaseControls m_Wrapper;
@@ -521,6 +608,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
         public InputAction @PointerDelta => m_Wrapper.m_Navigation_PointerDelta;
         public InputAction @OrbitShift => m_Wrapper.m_Navigation_OrbitShift;
         public InputAction @ModeShift => m_Wrapper.m_Navigation_ModeShift;
+        public InputAction @Zoom => m_Wrapper.m_Navigation_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Navigation; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -545,6 +633,9 @@ public class @BaseControls : IInputActionCollection, IDisposable
                 @ModeShift.started -= m_Wrapper.m_NavigationActionsCallbackInterface.OnModeShift;
                 @ModeShift.performed -= m_Wrapper.m_NavigationActionsCallbackInterface.OnModeShift;
                 @ModeShift.canceled -= m_Wrapper.m_NavigationActionsCallbackInterface.OnModeShift;
+                @Zoom.started -= m_Wrapper.m_NavigationActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_NavigationActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_NavigationActionsCallbackInterface.OnZoom;
             }
             m_Wrapper.m_NavigationActionsCallbackInterface = instance;
             if (instance != null)
@@ -564,6 +655,9 @@ public class @BaseControls : IInputActionCollection, IDisposable
                 @ModeShift.started += instance.OnModeShift;
                 @ModeShift.performed += instance.OnModeShift;
                 @ModeShift.canceled += instance.OnModeShift;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
         }
     }
@@ -652,6 +746,7 @@ public class @BaseControls : IInputActionCollection, IDisposable
         void OnPointerDelta(InputAction.CallbackContext context);
         void OnOrbitShift(InputAction.CallbackContext context);
         void OnModeShift(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
     public interface IPlanningActions
     {

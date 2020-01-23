@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     BaseControls controls;
+    Camera cam;
 
     public float screenBorder = 15;
 
@@ -31,6 +32,12 @@ public class CameraController : MonoBehaviour
     float cameraYRotation;
     float orbitDistance;
 
+    float zoomAmount;
+    float zoomSpeed = 5f;
+    [Range(0, 179)]
+    public float zoomMin = 10f;
+    [Range(0, 179)]
+    public float zoomMax = 80f;
 
     void Awake()
     {
@@ -39,13 +46,25 @@ public class CameraController : MonoBehaviour
         controls.Navigation.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Navigation.PointerLocation.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.Navigation.PointerDelta.performed += ctx => mouseDelta = ctx.ReadValue<Vector2>();
+        controls.Navigation.Zoom.started += ctx => zoomAmount = ctx.ReadValue<float>();
+        controls.Navigation.Zoom.performed += ctx => zoomAmount = ctx.ReadValue<float>();
+
+        cam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Handle pan and orbit, which differs slightly between input methods.
         DefaultHandler();
         MouseHandler();
+
+        // Handle zoom. Note that increasing fieldOfView zooms out, which is why zoomDelta is subtracted rather than added.
+        if (zoomAmount != 0)
+        {
+            float zoomDelta = zoomAmount * zoomSpeed * Time.deltaTime;
+            cam.fieldOfView = Mathf.Clamp(cam.fieldOfView - zoomDelta, zoomMin, zoomMax);
+        }
     }
 
     // DefaultHandler processes keyboard and gamepad input.
@@ -54,7 +73,7 @@ public class CameraController : MonoBehaviour
         if (!orbitMode)
         {
             // Outside of orbit mode, translate movement input directly into panning.
-float panX = moveInput.x * panSpeed * Time.deltaTime;
+            float panX = moveInput.x * panSpeed * Time.deltaTime;
             float panZ = moveInput.y * panSpeed * Time.deltaTime;
             pan = new Vector3(panX, 0, panZ);
 
