@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 90196398}
   - component: {fileID: 90196397}
   - component: {fileID: 90196396}
+  - component: {fileID: 90196401}
+  - component: {fileID: 90196400}
   m_Layer: 5
   m_Name: Build Button
   m_TagString: Untagged
@@ -250,6 +252,35 @@ RectTransform:
   m_AnchoredPosition: {x: 419.5, y: 232}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &90196400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90196395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7e57dd9adda44dbdd3d579fcb8d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 5d03699b09bf65d4f90ca74e72a74699, type: 3}
+--- !u!114 &90196401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90196395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d6eb751f5ad7e4896c7283b576b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipUI: {fileID: 1182318107}
+  text: 'Watch your city build and grow
+
+    (use keyboard 9 and 0 to switch modes)'
 --- !u!1 &125238508
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +608,8 @@ GameObject:
   - component: {fileID: 432856076}
   - component: {fileID: 432856075}
   - component: {fileID: 432856074}
+  - component: {fileID: 432856078}
+  - component: {fileID: 432856077}
   m_Layer: 5
   m_Name: Power
   m_TagString: Untagged
@@ -694,6 +727,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432856072}
   m_CullTransparentMesh: 0
+--- !u!114 &432856077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432856072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7e57dd9adda44dbdd3d579fcb8d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 3adc8b064b579a7438609ec783478fa9, type: 3}
+--- !u!114 &432856078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432856072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d6eb751f5ad7e4896c7283b576b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipUI: {fileID: 1182318107}
+  text: A power plant provides electricity to your city
 --- !u!1 &449946656
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +1001,7 @@ RectTransform:
   m_Children:
   - {fileID: 673428300}
   - {fileID: 1208908913}
+  - {fileID: 1182318106}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1173,6 +1234,8 @@ GameObject:
   - component: {fileID: 689122293}
   - component: {fileID: 689122292}
   - component: {fileID: 689122291}
+  - component: {fileID: 689122295}
+  - component: {fileID: 689122294}
   m_Layer: 5
   m_Name: Road
   m_TagString: Untagged
@@ -1290,6 +1353,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689122289}
   m_CullTransparentMesh: 0
+--- !u!114 &689122294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689122289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7e57dd9adda44dbdd3d579fcb8d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 21ccdba351738e7448c6418f921722e4, type: 3}
+--- !u!114 &689122295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689122289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d6eb751f5ad7e4896c7283b576b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipUI: {fileID: 1182318107}
+  text: Roads connect key locations
 --- !u!1 &729182655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,6 +1547,8 @@ GameObject:
   - component: {fileID: 1130553207}
   - component: {fileID: 1130553206}
   - component: {fileID: 1130553205}
+  - component: {fileID: 1130553209}
+  - component: {fileID: 1130553208}
   m_Layer: 5
   m_Name: Residential
   m_TagString: Untagged
@@ -1574,6 +1666,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130553203}
   m_CullTransparentMesh: 0
+--- !u!114 &1130553208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130553203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7e57dd9adda44dbdd3d579fcb8d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: ee163840ee28985479fd680db7a6a7b5, type: 3}
+--- !u!114 &1130553209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130553203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d6eb751f5ad7e4896c7283b576b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipUI: {fileID: 1182318107}
+  text: A residential zone gives citizens somewhere to live
+--- !u!1 &1182318105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1182318106}
+  - component: {fileID: 1182318107}
+  m_Layer: 5
+  m_Name: Tooltip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1182318106
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182318105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2036080453}
+  - {fileID: 1950392539}
+  m_Father: {fileID: 451010368}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 524, y: -229}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1182318107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182318105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4287561b47848c241a03af43a6c7f2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiCamera: {fileID: 0}
 --- !u!1 &1208908910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,6 +1831,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074cb3cb8c28d6a469ac2bb3fac4bf94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  illegalMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  boxLegal: 0
   legalPlan: {fileID: 2100000, guid: 8c29f34f1f653a443bbce77a4753f847, type: 2}
   illegalPlan: {fileID: 2100000, guid: 0119377b8702edd4b906ef53c2275d80, type: 2}
   road: {fileID: 8533637940351688534, guid: db1a187cb31832c41b47b5da68082fbb, type: 3}
@@ -2064,10 +2241,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fab8a97abdf4c41a509db8e6508d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPanel: {fileID: 1208908910}
   screenBorder: 5
   panSpeed: 100
-  orbitSpeed: 30
+  defaultOrbitSpeed: 50
+  mouseOrbitSpeed: 10
+  orbitYMax: 90
+  orbitYMin: 5
+  zoomMin: 10
+  zoomMax: 80
 --- !u!1 &1783994434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,6 +2299,8 @@ GameObject:
   - component: {fileID: 1892274067}
   - component: {fileID: 1892274066}
   - component: {fileID: 1892274065}
+  - component: {fileID: 1892274069}
+  - component: {fileID: 1892274070}
   m_Layer: 5
   m_Name: Plan Button
   m_TagString: Untagged
@@ -2235,6 +2418,190 @@ RectTransform:
   m_AnchoredPosition: {x: 319.5, y: 232}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &1892274069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892274064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7e57dd9adda44dbdd3d579fcb8d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 3e381136e12660d40baeca2ac07849ff, type: 3}
+--- !u!114 &1892274070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892274064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d6eb751f5ad7e4896c7283b576b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipUI: {fileID: 1182318107}
+  text: 'Plan out your city
+
+    (use keyboard 9 and 0 to switch modes)'
+--- !u!1 &1950392538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950392539}
+  - component: {fileID: 1950392541}
+  - component: {fileID: 1950392540}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1950392539
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950392538}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1182318106}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 4, y: -4}
+  m_SizeDelta: {x: 250, y: 96}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1950392540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950392538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Tooltip
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_textAlignment: 257
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 1950392540}
+    characterCount: 7
+    spriteCount: 0
+    spaceCount: 0
+    wordCount: 1
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1950392541
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950392538}
+  m_CullTransparentMesh: 0
 --- !u!1 &1951893458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,6 +2757,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951893458}
   m_CullTransparentMesh: 0
+--- !u!1 &2036080452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036080453}
+  - component: {fileID: 2036080455}
+  - component: {fileID: 2036080454}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2036080453
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036080452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1182318106}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &2036080454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036080452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2036080455
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036080452}
+  m_CullTransparentMesh: 0
 --- !u!1 &2087835898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,6 +2842,8 @@ GameObject:
   - component: {fileID: 2087835902}
   - component: {fileID: 2087835901}
   - component: {fileID: 2087835900}
+  - component: {fileID: 2087835904}
+  - component: {fileID: 2087835903}
   m_Layer: 5
   m_Name: View Button
   m_TagString: Untagged
@@ -2519,3 +2961,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087835898}
   m_CullTransparentMesh: 0
+--- !u!114 &2087835903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087835898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7e57dd9adda44dbdd3d579fcb8d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 8de2e93b4df333440ab76c54b240e09c, type: 3}
+--- !u!114 &2087835904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087835898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d6eb751f5ad7e4896c7283b576b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipUI: {fileID: 1182318107}
+  text: 'Tour your city in high definition
+
+    (use keyboard 9 and 0 to switch modes)'
