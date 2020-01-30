@@ -15,19 +15,17 @@ public class ModeSelect : MonoBehaviour
     enum Mode { Plan, Build, View };
     Mode currentMode;
 
-    private void Start()
-    {
-        
-    }
-
     void Awake()
     {
         currentMode = Mode.Plan;
         SelectCurrentMode();
+
+        // Sets up input system.
         controls = new BaseControls();
         controls.Navigation.ModeShift.performed += ctx => ModeShift(ctx.ReadValue<float>());
     }
 
+    // ModeShift takes user input to move either left or right (wrapping around) from one mode to the next.
     void ModeShift(float direction)
     {
         if (currentMode == Mode.Plan)
@@ -50,15 +48,15 @@ public class ModeSelect : MonoBehaviour
     {
         if (currentMode == Mode.Plan)
         {
-            PlanMode();
+            planButton.onClick.Invoke();
         }
         else if (currentMode == Mode.Build)
         {
-            BuildMode();
+            buildButton.onClick.Invoke();
         }
         else
         {
-            ViewMode();
+            viewButton.onClick.Invoke();
         }
     }
 
@@ -66,12 +64,14 @@ public class ModeSelect : MonoBehaviour
     {
         planPanel.SetActive(true);
         SetActiveButton(planButton);
+        MuteButtons(buildButton, viewButton);
         currentMode = Mode.Plan;
     }
     public void BuildMode()
     {
         planPanel.SetActive(false);
         SetActiveButton(buildButton);
+        MuteButtons(planButton, viewButton);
         currentMode = Mode.Build;
     }
 
@@ -79,7 +79,14 @@ public class ModeSelect : MonoBehaviour
     {
         planPanel.SetActive(false);
         SetActiveButton(viewButton);
+        MuteButtons(buildButton, planButton);
         currentMode = Mode.View;
+    }
+
+    void MuteButtons(Button button1, Button button2)
+    {
+        button1.GetComponent<ButtonSound>().StopSound();
+        button2.GetComponent<ButtonSound>().StopSound();
     }
 
     void SetActiveButton(Button activeButton)
