@@ -25,6 +25,10 @@ public class ButtonSound : MonoBehaviour
 
     public void StopSound()
     {
+        if (source == null)
+        {
+            return;
+        }
         source.Stop();
     }
 

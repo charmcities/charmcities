@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2998980060137958829}
   - component: {fileID: 8990855674151702705}
   m_Layer: 0
-  m_Name: Fence Segment
+  m_Name: Wood Construction Fence Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

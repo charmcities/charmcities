@@ -18,6 +18,9 @@ public class PlanPanel : MonoBehaviour
     public GameObject powerPlant;
     public GameObject residentialZone;
 
+    public Terrain terrain;
+    ConstructionSite construction;
+
     Vector2 mousePos;
 
     GameObject currentObject;
@@ -27,6 +30,8 @@ public class PlanPanel : MonoBehaviour
         controls = new BaseControls();
         controls.Planning.Position.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
         controls.Planning.Place.performed += ctx => PlaceCurrent();
+
+        construction = terrain.GetComponent<ConstructionSite>();
     }
 
     private void Update()
@@ -80,11 +85,17 @@ public class PlanPanel : MonoBehaviour
 
     void PlaceCurrent()
     {
-        if (boxLegal)
+        if (!boxLegal)
         {
-            currentObject.layer = 10;
-            showBox = false;
+            return;
         }
+        currentObject.layer = 10;
+        showBox = false;
+        construction.CreatePloppableSite(
+            currentObject.transform.position,
+            currentObject.transform.lossyScale.x / 8,
+            currentObject.transform.lossyScale.z / 8
+        );
     }
 
     private void OnEnable()
