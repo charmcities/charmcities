@@ -59,9 +59,25 @@ public class PlanPanel : MonoBehaviour
                     10000,
                     illegalMask
                 );
-                currentObject.transform.position = new Vector3(
-                    groundHit.point.x, currentObject.transform.position.y, groundHit.point.z
+
+                // Find the position of one of the corners.
+                Vector3 corner = new Vector3(
+                    groundHit.point.x - currentObject.transform.localScale.x / 2,
+                    currentObject.transform.position.y,
+                    groundHit.point.z - currentObject.transform.localScale.z / 2
                 );
+                
+                // Make sure the corner is aligned with the 8x8 grid.
+                corner = GridUtilities.RoundToNearestSquare(corner);
+
+                // Then convert back to the center position.
+                Vector3 center = new Vector3(
+                    corner.x + currentObject.transform.localScale.x / 2,
+                    corner.y,
+                    corner.z + currentObject.transform.localScale.z / 2
+                );
+
+                currentObject.transform.position = center;
                 currentObject.GetComponent<MeshRenderer>().material = boxLegal ? legalPlan : illegalPlan;
             }
         }

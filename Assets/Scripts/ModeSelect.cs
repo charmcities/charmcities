@@ -7,7 +7,10 @@ public class ModeSelect : MonoBehaviour
 {
     BaseControls controls;
 
-    public GameObject planPanel;
+    public GameObject[] planItems;
+    public GameObject[] buildItems;
+    public GameObject[] viewItems;
+
     public Button planButton;
     public Button buildButton;
     public Button viewButton;
@@ -60,16 +63,29 @@ public class ModeSelect : MonoBehaviour
         }
     }
 
+    private void SetItemsActive(GameObject[] itemList, bool status)
+    {
+        foreach (GameObject item in itemList)
+        {
+            item.SetActive(status);
+        }
+
+    }
+
     public void PlanMode()
     {
-        planPanel.SetActive(true);
+        SetItemsActive(planItems, true);
+        SetItemsActive(buildItems, false);
+        SetItemsActive(viewItems, false);
         SetActiveButton(planButton);
         MuteButtons(buildButton, viewButton);
         currentMode = Mode.Plan;
     }
     public void BuildMode()
     {
-        planPanel.SetActive(false);
+        SetItemsActive(planItems, false);
+        SetItemsActive(buildItems, true);
+        SetItemsActive(viewItems, false);
         SetActiveButton(buildButton);
         MuteButtons(planButton, viewButton);
         currentMode = Mode.Build;
@@ -77,7 +93,9 @@ public class ModeSelect : MonoBehaviour
 
     public void ViewMode()
     {
-        planPanel.SetActive(false);
+        SetItemsActive(planItems, false);
+        SetItemsActive(buildItems, false);
+        SetItemsActive(viewItems, true);
         SetActiveButton(viewButton);
         MuteButtons(buildButton, planButton);
         currentMode = Mode.View;
