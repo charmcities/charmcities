@@ -19,8 +19,6 @@ public class CameraController : MonoBehaviour
     Vector2 mousePos = Vector2.zero;
     Vector2 mouseDelta = Vector2.zero;
 
-    private Vector3 pan;
-
     private bool orbitMode = false;
     private Vector3 orbitTarget;
     [Range(0,90)]
@@ -80,9 +78,12 @@ public class CameraController : MonoBehaviour
             // Outside of orbit mode, translate movement input directly into panning.
             float panX = moveInput.x * panSpeed * Time.deltaTime;
             float panZ = moveInput.y * panSpeed * Time.deltaTime;
-            pan = new Vector3(panX, 0, panZ);
+            Vector3 pan = new Vector3(panX, 0, panZ);
 
-            transform.Translate(pan, Space.Self);
+            // Because the camera is angled on X, we must translate in Space.World. This means accounting for the camera's rotation.
+            pan = Quaternion.AngleAxis(transform.eulerAngles.y, Vector3.up) * pan;
+            transform.Translate(pan, Space.World);
+
         }
         else
         {
@@ -116,7 +117,9 @@ public class CameraController : MonoBehaviour
                 pan += Vector3.right * panSpeed * Time.deltaTime;
             }
 
-            transform.Translate(pan, Space.Self);
+            // Because the camera is angled on X, we must translate in Space.World. This means accounting for the camera's rotation.
+            pan = Quaternion.AngleAxis(transform.eulerAngles.y, Vector3.up) * pan;
+            transform.Translate(pan, Space.World);
         }
         else
         {
